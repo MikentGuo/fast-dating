@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Tindle</title>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/popper.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<style>
+body {
+    font-family:Verdana, Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;     
+    margin: auto;
+    --color-1: rgb(110, 13, 90);    
+    --color-2: rgb(190, 13, 119);
+}
+
+header {
+    /* background-color: #869dc7;  */
+    background-color: rgb(153, 217, 234);
+    color: #b1b1d3; 
+    font-size: 120%; 
+    padding: 10px 10px 10px 10px;
+    background-repeat: no-repeat;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+}
+
+h1 {
+    position: relative;
+    margin:auto;
+    margin-left:10px;    
+    color: rgb(255,255,255);
+}
+
+.main {
+    width:100%;
+    display: flex;
+}
+
+.sidebar { 
+       float: left;
+	   width: 220px;
+       height: 100vh;
+	   letter-spacing:0.1em;
+	   font-weight: bold;
+       background-color: rgb(236,236,255);
+       z-index: 1;
+} 
+
+.sidebar ul { 
+        list-style-type: none; 
+        margin: 0;
+        padding: 5px;
+}
+
+.sidebar a { 
+text-decoration: none; 
+        display: block;
+	    padding: 20px;    
+        background-color: #b3c7e6;     
+	    border-bottom: 1px solid #ffffff; 
+        border-radius: 3px;
+}
+.sidebar a:link { 
+    color: #ffffff; 
+}
+.sidebar a:visited { 
+    color: #eaeaea; 
+}
+
+a:hover { 
+    /*
+    background-color: #eaeaea;
+    color: #869dc7;
+    */
+    cursor: pointer;
+}
+
+#content { 
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 10px;
+    margin:auto;
+    z-index: 0;
+    padding-top: auto;
+    width:100%;
+    height:100%;    
+} 
+
+footer {
+    position: fixed;
+
+    font-size:70%;
+    text-align: center;
+    padding-top: 20px;
+    
+    width: 100%;
+    height: 5vh;
+    margin: auto;
+    padding: auto;
+
+    left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(134, 157, 199, 0.5);
+  color: white;
+  text-align: center;   
+  z-index:1; 
+}
+
+.main-nav {
+    position: relative;
+    width: auto;
+    padding: 10px 10px 10px 10px;    
+    --color-1: rgba(196, 206, 214, 0.8);
+    --color-2: rgba(75, 96, 114, 0.8);      
+}
+
+.main-nav ul li {
+  display: inline;
+  padding: 1em;
+  list-style-type: none;  
+  float:left;
+}
+.main-nav ul li:last-child {
+  border-bottom: none;
+}
+.main-nav ul li a {
+  color: rgb(255,255,255);
+  text-decoration: none;
+}
+.main-nav ul li a:hover {
+  color: var(--color-2);
+}
+
+.title {
+    font-family: 'Tangerine', cursive;
+    font-size: 2.7em;
+    color: var(--color-1);
+    /*left: -120px;*/
+    left: 20px;
+} 
+</style>
+</head>
+<body>
+    <header>
+        <h1 class="title">Tindle</h1> 
+        <!-- 
+        <a href="https://www.johnabbott.qc.ca/" target="_blank">
+            <img src="images/logo.png" style="width:60%;" alt="logo">
+        </a>        
+        <h1 class="title">Dating In John Abbott College</h1>
+        -->
+        <div id="message_box"><div>
+    </header> 
+
+    <div class="main">
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+	  		<div class="img bg-wrap text-center py-4">
+	  			<div class="user-logo">
+                    {% if photoVal == "#" %}
+                        <div id="userFace" class="img" style="background-image: url(/images/face.jpg);"></div>
+                    {% else %}
+                        <div id="userFace" class="img" style="background-image: url({{photoVal}});"></div>
+                    {% endif %}                                        
+	  				<h3 id="userNameVal">{{nameVal}}</h3>
+	  			</div>
+	  		</div>
+            <ul class="list-unstyled components mb-5">
+            <li>
+                <a href="/"><span class="fa fa-home mr-3"></span> Home</a>
+            </li>
+            <li>
+                <a onclick="showRecommendation()"><span class="fa fa-thumbs-up mr-3"></span> Swipe</a>
+            </li>
+            <li>
+                <!-- <a onclick="showChatRoom"><span class="fa fa-trophy mr-3"></span> Chat</a> -->
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <span class="fa fa-commenting mr-3"></span> Chat</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    {% if chatRoomList|length > 0 %}
+                        {% for room in chatRoomList %}
+                            <li>
+                                <a onclick="showChatRoom({{ room.id }})">Chat Room - {{room.name}}</a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li>
+                            <a href="#">No Available Chatroom</a>
+                        </li>                        
+                    {% endif %}                
+                </ul>
+	          </li>                
+            </li>
+            <li>
+                <a onclick="showMatches()"><span class="fa fa-heart mr-3" id="notify_matche" >
+                <small class="d-flex align-items-center justify-content-center"></small>
+                </span> Matches</a>
+            </li>
+            <li>
+                <!-- <a onclick="showLikes()"><span class="fa fa-user-circle-o mr-3"></span> Likes</a> -->
+                <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <span class="fa fa-user-circle-o mr-3"></span> Likes</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu1">
+                    <li>
+                        <a onclick="showWhoLikesYou()">Who Likes You</a>
+                    </li>
+                    <li>
+                        <a onclick="showYourLikes()">Your Likes</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="showMessage()"><span class="fa fa-paper-plane mr-3" id="notify_message" >
+                <small class="d-flex align-items-center justify-content-center"></small>
+                </span> Message</a>
+            </li>
+            <li>
+                <a onclick="showProfile()"><span class="fa fa-file-text-o mr-3"></span> Profile</a>
+            </li>
+            <li>
+                <a onclick="showAbout()"><span class="fa fa-trophy mr-3"></span> About Us</a>
+            </li>
+            <li>
+                <a onclick="showSignoutModal()"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+            </li>
+            </ul>
+            </nav>
+
+            <iframe id="content" width='100%' height='100%' style="background-color: aliceblue;"
+                frameborder='no' border='0' marginwidth='0' marginheight='0' style='padding-left:0px;'>
+            </iframe>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content rounded-0">
+                    <div class="modal-body p-4 px-5 text-center">                
+                        <br>                  
+                        <label for=""><strong><h5>Are you sure you want to sign out?</h5></strong></label>
+                        <br><br>
+                        <div class="d-flex">
+                            <div class="mx-auto">
+                                <a href="/logout" class="btn btn-secondary">Yes</a>
+                                <span style="margin-left:2.5em"></span>
+                                <a onclick="showSignoutModal()" class="btn btn-primary" style="color:white;">No</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> 
+
+    <script>
+         //var chatServerURL = "http://127.0.0.1:9000/chat.html"
+         var chatServerURL = "http://3.14.66.20:9000/chat.html";
+
+        var token = 0;
+        var userName = "{{nameVal}}";
+        var userId = "{{idVal}}";
+        var photoPath = "http://" + window.location.hostname + "{{photoVal}}";
+
+        console.log("username", userName);
+
+        window.datingApp = {} || window.datingApp;
+        window.datingApp.userName = userName;
+        window.datingApp.userId = userId;
+
+        $(document).ready(function() {
+            $("#matched_message").hide();
+
+            window.datingApp.showRecommendation = showRecommendation;
+            window.datingApp.showAlertMessage = showAlertMessage;
+            window.datingApp.updateFacePhoto = updateFacePhoto;
+            window.datingApp.updateProfilePage = updateProfilePage;
+
+            fetchIframe('#content','/photo1','get');
+
+            heartbeat(); // initialize it        
+        });        
+
+        function loadIframe(iframeName, url) {
+            var $iframe = $('#' + iframeName);
+            if ( $iframe.length ) {
+                $iframe.attr('src',url);
+                return false;
+            }
+            return true;
+        }
+
+        function writeIframeData(iframeName, data) {
+            document.querySelector(iframeName).contentWindow.document.open();
+            document.querySelector(iframeName).contentWindow.document.write(data);
+            document.querySelector(iframeName).contentWindow.document.close(); 
+        }
+
+        function fetchIframe(iframeName, url, method) {
+            $.ajax({
+                url: url,
+                type: method,
+                error: function(jqxhr, status, errorThrown) {
+                    window.location.href = '/'
+                }
+            }).done(function(data) {
+                //console.log("fetch", data);
+                writeIframeData(iframeName, data);                
+            });                
+        }
+
+        showRecommendation = function() {
+            fetchIframe('#content','/recommend','get');
+        }
+
+        showMatches = function() {
+            fetchIframe('#content','/matches','get');
+
+            $("#notify_matche").removeClass("notif");
+            $("#message_box").hide();
+        }
+
+        showAlertMessage = function(msg, match_flag) {
+            var box= `
+                <div class="alert alert-success alert-dismissible" id="matched_message">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>` + msg +             
+                `</div>`;
+            $("#message_box").html(box);
+            $("#message_box").show();
+
+            if(match_flag){
+                $("#notify_matche").addClass("notif");
+            }
+        }   
+        
+        updateFacePhoto = function(img) {
+            $("#userFace").css("background-image", "url("+img+")");
+        }
+
+        updateProfilePage = function(name) {
+            showProfile();
+            $("#userNameVal").text(name);
+        }
+
+        function showChatRoom(room) {
+            var url = encodeURI(chatServerURL + "?uid=" + userId + "&name=" + 
+                        userName + "&room=" + room + "&token=" + "fsd01" + "&photo=" + photoPath);
+            //$('#content').attr('src', url)
+
+           var data = "<iframe src='"+url+"' width='100%' height='100%' " + 
+                       "frameborder='no' border='0' marginwidth='0' marginheight='0' style='padding-left:0px;'></iframe> ";        
+            writeIframeData('#content',data);
+        }
+
+        function showLikes() {
+            fetchIframe('#content','/likes','get');
+        }
+
+        function showWhoLikesYou() {
+            fetchIframe('#content','/likes','get');
+        }
+
+        function showYourLikes() {
+            fetchIframe('#content','/likes1','get');
+        }
+
+        function showProfile() {              
+            fetchIframe('#content','/edit-profile','get');
+        }
+       
+        function showMessage() {
+            $("#notify_message").removeClass("notif");
+            $("#message_box").hide();
+
+           fetchIframe('#content','/message','get');         
+        }         
+
+        function showAbout() {
+            fetchIframe('#content','/about','get');            
+        }
+
+        function showSignoutModal() {
+            $('#modalCenter').modal('toggle');
+        }
+
+        function uploadSwipePhoto() {
+            fetchIframe('#content','/photo1','get');
+        }     
+        
+        function heartbeat(){
+            $.ajax({
+                url: '/tick',
+                type: "post",          
+                dataType: "json",             
+                data: JSON.stringify({
+                    token: token
+                }),                
+                'success': function(data){
+                    setTimeout(heartbeat, 5000);
+                    //console.log("recv server ack", data);
+                    if(data.flag == 1) {              
+                         if(data.data.mtype == 0)     
+                            showAlertMessage(data.data.msg);
+                         else
+                            showAlertMessage("You have a new message form your mathces.");
+                         if(data.data.from_id != 0) {  // non-system msg
+                            $("#notify_message").addClass("notif"); 
+                         }else{
+                             if(data.data.mtype == 0) { //matches msg
+                                 $("#notify_matche").addClass("notif");   
+                             }
+                         }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,238 @@
+##==>>1: What you did yesterday?
+
+##==>>2: What you are planning today?
+
+##==>>3: Any challenges?
+
+Day 1 (10/25/2021):
+ Amin:
+    1: I create the project structure with teacher.(git trello files).
+    2: I'm going to implements UI(Just HTML and CSS) of login page.
+    3: So far so good!
+
+Shengguang:
+    1: finished development environment setup
+       fixed some problems of project
+       added cards in trello backlog
+    2: working on chat feature
+    3: no       
+
+
+ Kevin:
+    1: Set up repository access via VS Code. Researched similar websites.
+    2. Continue research. Create master html.twig file.
+    3. So far so good.
+
+Day 2 (10/26/2021):
+Shengguang:
+    1: fsd01.ca domain environment setup
+       chat design
+    2: working on chat features:
+       install nodejs 
+       desgin, front-end html      
+    3: no       
+
+Kevin:
+   1: Continued similar website research.
+   2: Begin profile creator PHP/Slim implementation
+   3: no
+
+Amin:
+   1: fsd01.ca domain environment setup
+      Continued similar website research.
+   2: Begin workingon login/register
+   3: no
+
+Day 3 (10/27/2021):
+Amin:
+   1: fixing database tables and keys and indexes
+      searching about jwt token to implement in register
+      searching about google, facebook apies for user registeration. 
+   2: finish register
+   3: no
+
+Shengguang:
+   1: installed nodejs
+      researched socket.io and other libraries
+   2: Continue working on chat
+      desgin chat page layout
+   3: no
+
+   Kevin:
+   1: Created skeleton for PHP/Slim profile implementation
+   2: Continue profile URL handling
+   3: no
+
+Day 4 (10/28/2021):
+Shengguang:
+   1: nodejs express setup
+      test socket.io and other libraries
+   2: Continue working on chat
+      front-end UI and back-end logic
+   3: no
+
+Kevin:
+   1: no substantial progress.
+   2: Continue profile handling.
+   3: no.
+
+Amin:
+   1: implementing the login UI.
+   2: reading about google Auth 2.
+   3: no.   
+
+
+Day 5 (10/29/2021):
+Kevin:
+   1: Reviewed Slim documentation.
+   2: Continue profile handling.
+   3: no.
+
+
+Amin:
+   1: implementing the signup UI.
+   2: reading about Facebook Auth 2.
+   3: no.
+
+
+Shengguang:
+   1: test nodejs express framework and socket.io
+      desgin main page layout
+      research mock user data       
+   2: Continue working on chat
+   3: no
+
+Day 6 (11/1/2021):
+Shengguang:
+   1: main page layout & tinder feature
+   2: mock user data
+      main page layout
+   3: no
+
+Kevin:
+   1: Discussed profile handling strategy with Amin
+   2: Focus on web services today - return to project tomorrow
+   3: no
+
+Amin:
+   1: Discussed profile handling strategy with Kevin
+   2: Implementing the Ui of edit profile
+   3: no   
+
+
+Day 7 (11/2/2021):
+Shengguang:
+   1: mock user data 
+   2: improve tinder swipe feature
+      pass/like feature
+   3: no
+
+Kevin:
+   1: Focused on web services. No work planned.
+   2: Advance on profile handling (edit for own profile) including validation
+   3: Time management + divided attention
+
+Amin:
+   1: reading about laravel frame work for implementing the apies for register, login, 
+   2: implementing the register and login apies changing some database colomn to enum;
+   3: i was so silly last week i was sick and also had an interview that i sould read for that+ lots of new thing about nodeJS  
+
+Day 8 (11/3/2021):
+Shengguang:
+   1: mock user data 
+   2: fix tinder swipe feature bug      
+   3: no
+
+Kevin:
+   1: Profile view planning
+   2: Profile view implementation
+   3: no
+
+Amin:
+   1: implementation of signup and login using JWT
+   2: add google and facebooke apies
+   3: no   
+
+Day 9 (11/4/2021):
+Shengguang:
+   1: profile and matches pages intergration into main page
+   2: fix matches page
+   3: need to fix the problem of multiple css style in sub pages
+Amin:
+   1: implementation of admin panel
+   2: add pagination for users
+   3: no   
+
+Day 10 (11/10/2021):
+Kevin:
+   1: non-working day (exam)
+   2: discuss speed-date implementation plan with Amin; work on profile view/edit
+   3: no
+
+Shengguang:
+   1: exam
+   2: work on chat feature
+   3: no
+
+Amin:
+   1: exam
+   2: add pagination for users
+   3: no   
+
+Day 11 (11/11/2021):
+Shengguang:
+   1: worked on matches logic
+   2: still work on chat features
+   3: no
+
+Amin:
+   1: worked on Pagination for users and admin panel
+   2: change sign up and log in just for admin panle
+   3: no   
+
+Day 12 (11/12/2021):
+Shengguang:
+   1: work on chat features
+   2: sovled nodejs cross-domain
+      chat client UI
+   3: no
+
+Amin:
+   1: change sign up and log in just for admin panle finalize pagination and orderby feature
+   2: add charts and change theme for admin panel
+   3: no      
+
+Day 13 (11/13/2021):
+Shengguang:
+   1: client chat UI & logic
+   2: modify the home/main page
+      work on likes UI & logic, 
+   3: no
+
+Amin:
+   1: finalizing the admin panel
+   2: bug fix
+   3: no   
+
+
+Day 13 (11/13/2021):
+Shengguang:
+   1: worked on home/main page ,likes page
+   2: work on chat server
+      work on messages
+      work on swipe photo upload
+   3: no
+
+Day 14 (11/14/2021):
+Shengguang:
+   1: swipe photo, chat server, message page
+   2: work on about us page
+	  work on message delete
+	  work on signout popup
+   3: no
+
+Amin:
+   1: admin panel bug fix
+   2: finalize  admin panel
+      create a chart based on users gender creating powerpoint for my parts
+   3: no    

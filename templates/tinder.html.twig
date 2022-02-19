@@ -1,0 +1,96 @@
+<link rel="stylesheet" type="text/css" href="/css/swipe.css">
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.transform2d.js"></script>
+<script type="text/javascript" src="/js/swipe.js?v=111"></script>   
+
+<div class="wrap">
+    {% if items|length > 0 %}
+        <div id="tinderslide">
+            <ul>
+            {% for item in items %}
+                <li id="pane{{item.index}}", class="pane{{item.index}}" data-value={{item.id}}>
+                    <div class="img" style='background: url(./{{ item.photo }}) no-repeat scroll center center;background-size: cover;'></div>
+                    <div>{{ item.userName }}</div>
+                    <div class="like"></div>
+                    <div class="dislike"></div>
+                </li>
+            {% endfor %}
+            </ul>      
+        </div>
+        <div class="actions">
+            <a href="#" class="dislike"><i></i></a>
+            <a href="#" class="like"><i></i></a>
+        </div>    
+        <div id="status">
+            <span style="color: rgb(200,20,20); width: 100%; left: 0;">Swipe Left or Right To Pass or Like</span>
+        </div>        
+    {% else %}
+        <p><h1>No Recommendation Available Now</h1></p>
+    {% endif %}    
+</div>
+
+
+<script>
+    $("#tinderslide").Swipe({
+        onDislike: function (item) {
+            //send message to server            
+            //console.log("onDislike", "#pane"+item.index(), document.getElementById("pane"+item.index()).getAttribute("data-value"));
+            $.ajax({     
+                url: '/swipe',
+                type: "post",          
+                dataType: "json",             
+                data: JSON.stringify({
+                    id: document.getElementById("pane"+item.index()).getAttribute("data-value"),
+                    operation: "pass"
+                }),
+                success: function(data){
+                    //console.log("recv onDislike", data);
+                } 
+            }); 
+
+            if(item.index() == 0){
+                var app = parent.datingApp;
+                app.showRecommendation();
+            }                
+        },
+        onLike: function (item) {
+            //send message to server
+            //console.log("onLike", "#pane"+item.index(), document.getElementById("pane"+item.index()).getAttribute("data-value"));
+            $.ajax({     
+                url: '/swipe',
+                type: "post",          
+                dataType: "json",             
+                data: JSON.stringify({
+                    id: document.getElementById("pane"+item.index()).getAttribute("data-value"),
+                    operation: "like"
+                }),
+                success: function(data){
+                    //console.log("recv onLike", data);
+
+                    //var msg = JSON.parse(data);
+                    if(data.data == 1){
+                        var app = parent.datingApp;
+                        app.showAlertMessage("<strong>Congratulations!</strong> You have a new matches.", true);
+                    }
+                } 
+            });  
+
+            if(item.index() == 0){
+                var app = parent.datingApp;
+                app.showRecommendation();
+            }
+        },
+        animationRevertSpeed: 200,
+        animationSpeed: 400,
+        threshold: 1,
+        likeSelector: '.like',
+        dislikeSelector: '.dislike'
+    });
+
+    $('.actions .like, .actions .dislike').click(function(e){
+	    e.preventDefault();
+	    $("#tinderslide").Swipe($(this).attr('class'));
+    });
+</script>
+
+
